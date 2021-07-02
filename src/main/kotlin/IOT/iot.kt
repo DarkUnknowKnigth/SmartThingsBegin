@@ -1,6 +1,6 @@
 package IOT
 
-class IOT(val name: String, private val connectionType: String, private val macAddress: String) {
+open class IOT(val name: String, private val connectionType: String, private val macAddress: String) {
     private val on = false
     private var volume = 5
     private var connected = false
