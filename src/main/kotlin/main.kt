@@ -1,3 +1,6 @@
+import Devices.SmartPhone
+import Devices.SmartSpeaker
+import Devices.SmartTV
 import IOT.Account
 import IOT.IOT
 import IOT.Master
@@ -8,9 +11,17 @@ fun main(args: Array<String>) {
     if (account.isAuthenticated()){
         println("Logged as ${account.user}")
     }
-    val velvet = IOT("LG VELVET","WIFI","66:F5:AA:C9:AA")
-    val samsungTv = IOT("SMART TV SAMSUNG","WIFI","66:F1:1A:79:AA")
-    val miBox = IOT("MI BOX XIAOMI","WIFI","55:61:1A:D9:AA")
+    var name: String? = null
+    try {
+        println("Ingrese el nombre del dispositivo")
+        name = readLine()
+    } catch (e: Exception){
+        println("Ingrese un nombre valido")
+        name="Sin nombre"
+    }
+    val velvet = SmartPhone(name!!,"WIFI","66:F5:AA:C9:AA")
+    val samsungTv = SmartTV("SMART TV SAMSUNG","WIFI","66:F1:1A:79:AA")
+    val miBox = SmartSpeaker("MI BOX XIAOMI","WIFI","55:61:1A:D9:AA")
     val home = Master("SMART HOME")
     account.home = home
     home.pairedDevices()
@@ -23,7 +34,7 @@ fun main(args: Array<String>) {
     account.home.setControl(samsungTv.name)
     account.home.controlAt.volumeControl(true)
     println(account.home.controlAt.info())
-    account.renameHome("Danys SmartHome")
+    account.renameHome("SmartHome")
     println(account.home.name)
     account.logout()
 }
