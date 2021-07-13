@@ -4,9 +4,13 @@ import Devices.SmartTV
 import IOT.Account
 import IOT.IOT
 import IOT.Master
+import java.util.Date
+import java.text.SimpleDateFormat
 
 fun main(args: Array<String>) {
-    println("SmartThings initialized")
+    val now = Date()
+    val formatDate = SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz")
+    println("SmartThings initialized ${formatDate.format(now)}")
     val account = Account("Dany", "12345678")
     if (account.isAuthenticated()){
         println("Logged as ${account.user}")
